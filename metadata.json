@@ -1,0 +1,6 @@
+{
+  "name": "LendiControl",
+  "description": "Sistema de gestión de préstamos y pagos con reportes, estados de cuenta y recibos digitales compartibles.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

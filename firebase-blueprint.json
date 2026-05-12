@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "Client": {
+      "title": "Client",
+      "description": "A person who borrows money.",
+      "type": "object",
+      "properties": {
+        "clientNumber": { "type": "string", "description": "Unique client identifier (e.g. CLI-001)" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string", "description": "UID of the lender who registered the client" }
+      },
+      "required": ["clientNumber", "name", "createdBy"]
+    },
+    "Loan": {
+      "title": "Loan",
+      "description": "A loan assigned to a client.",
+      "type": "object",
+      "properties": {
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "amount": { "type": "number" },
+        "interestRate": { "type": "number", "description": "Percentage" },
+        "penaltyRate": { "type": "number", "description": "Penalty per late day or event" },
+        "totalDebt": { "type": "number" },
+        "remainingBalance": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "paid", "default"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string" }
+      },
+      "required": ["clientId", "amount", "totalDebt", "remainingBalance", "status", "createdBy"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "A payment record for a loan.",
+      "type": "object",
+      "properties": {
+        "paymentNumber": { "type": "string", "description": "Unique receipt identifier (e.g. REC-001)" },
+        "loanId": { "type": "string" },
+        "clientId": { "type": "string" },
+        "amount": { "type": "number" },
+        "penaltyApplied": { "type": "number" },
+        "interestApplied": { "type": "number" },
+        "previousBalance": { "type": "number" },
+        "newBalance": { "type": "number" },
+        "date": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string" }
+      },
+      "required": ["paymentNumber", "loanId", "clientId", "amount", "newBalance", "date", "createdBy"]
+    },
+    "Counter": {
+      "title": "Counter",
+      "description": "Global counters for unique IDs.",
+      "type": "object",
+      "properties": {
+        "lastClientNumber": { "type": "integer" },
+        "lastReceiptNumber": { "type": "integer" }
+      }
+    }
+  },
+  "firestore": {
+    "/clients/{clientId}": {
+      "schema": "Client",
+      "description": "Collection of clients."
+    },
+    "/loans/{loanId}": {
+      "schema": "Loan",
+      "description": "Collection of loans."
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Collection of payments."
+    },
+    "/settings/counters": {
+      "schema": "Counter",
+      "description": "Global counters for IDs."
+    }
+  }
+}

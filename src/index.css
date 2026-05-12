@@ -1,0 +1,110 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: var(--app-bg);
+  --color-text: var(--app-text);
+  --color-neu-dark: var(--neu-dark);
+  --color-neu-light: var(--neu-light);
+  --color-accent: #4F46E5;
+  
+  /* Slate hex overrides for compatibility */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Accent hex overrides for compatibility */
+  --color-blue-400: #60a5fa;
+  --color-blue-500: #3b82f6;
+  --color-blue-600: #2563eb;
+  
+  --color-green-400: #4ade80;
+  --color-green-500: #22c55e;
+  --color-green-600: #16a34a;
+  
+  --color-purple-400: #c084fc;
+  --color-purple-500: #a855f7;
+  --color-purple-600: #9333ea;
+  
+  --color-red-400: #f87171;
+  --color-red-500: #ef4444;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+:root {
+  --app-bg: #F3F4F6;
+  --app-text: #475569;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0, 0, 0, 0.05);
+  --heading-text: #0F172A;
+  --neu-dark: #D1D5DB;
+  --neu-light: #FFFFFF;
+  --input-bg: rgba(0, 0, 0, 0.04);
+}
+
+.dark-mode {
+  --app-bg: #1A1C1E;
+  --app-text: #cbd5e1;
+  --card-bg: rgba(255, 255, 255, 0.03);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --heading-text: #FFFFFF;
+  --neu-dark: #121416;
+  --neu-light: #222426;
+  --input-bg: rgba(26, 28, 30, 0.3);
+}
+
+.light-mode {
+  --app-bg: #F3F4F6;
+  --app-text: #475569;
+  --card-bg: #FFFFFF;
+  --card-border: rgba(0, 0, 0, 0.05);
+  --heading-text: #0F172A;
+  --neu-dark: #D1D5DB;
+  --neu-light: #FFFFFF;
+  --input-bg: rgba(0, 0, 0, 0.04);
+}
+
+@layer base {
+  body {
+    @apply bg-[var(--app-bg)] text-[var(--app-text)] min-h-screen font-sans antialiased;
+    transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  }
+}
+
+@layer components {
+  .neumorphic {
+    background-color: var(--app-bg);
+    box-shadow: 8px 8px 16px var(--neu-dark), -8px -8px 16px var(--neu-light);
+    @apply rounded-3xl transition-all duration-300;
+  }
+
+  .neumorphic-inset {
+    box-shadow: inset 6px 6px 12px var(--neu-dark), inset -6px -6px 12px var(--neu-light);
+    background-color: var(--input-bg);
+    @apply rounded-[2rem] transition-all duration-300;
+  }
+
+  .glass-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    backdrop-filter: blur(24px);
+    @apply shadow-xl rounded-[2rem] p-6 transition-all duration-300;
+  }
+  
+  .heading-primary {
+    color: var(--heading-text);
+    @apply transition-colors duration-500;
+  }
+
+  .badge {
+    @apply px-3 py-1.5 rounded-2xl text-[10px] font-black uppercase tracking-widest bg-blue-600 text-white shadow-lg shadow-blue-500/20;
+  }
+}
